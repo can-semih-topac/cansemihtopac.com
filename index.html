@@ -13,19 +13,65 @@
             --glass-bg: rgba(255,255,255,0.04);
             --glass-border: rgba(255,255,255,0.06);
             --muted: #94a3b8;
+            /* Proje Kartları İçin Dinamik Değişkenler */
+            --card-title: #f8fafc;
+            --card-desc: #94a3b8;
         }
         .light{
             --bg: #f8fafc;
             --text: #0f172a;
             --glass-bg: rgba(15,23,42,0.04);
-            --glass-border: rgba(15,23,42,0.06);
+            --glass-border: rgba(15,23,42,0.08);
             --muted: #475569;
+            /* Açık temada yazıları tamamen NET SİYAH ve KOYU yapıyoruz */
+            --card-title: #0f172a !important;
+            --card-desc: #1e293b !important;
         }
         body { background-color: var(--bg); color: var(--text); }
         .glass { background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); }
         .muted { color: var(--muted); }
 
-        /* Theme switch (matches reference look) */
+        /* Tarayıcının renkleri ezmesini garanti altına alan sınıflar */
+        .project-section h2, .project-section h3, .project-section h4 {
+            color: var(--card-title) !important;
+        }
+        
+        .project-section p {
+            color: var(--card-desc) !important;
+        }
+        /* İletişim Bilgileri altındaki metinleri açık/koyu temaya göre zorlama */
+        .contact-info-box h3, .contact-info-box span {
+            color: var(--card-title) !important;
+        }
+        /* Üst menü linklerini açık/koyu temaya göre zorlama */
+        nav .nav-link-item {
+            color: var(--card-title) !important;
+        }
+        /* Açık temada menü elemanlarının üzerine gelindiğinde (hover) mavi tonu korumak için */
+        .light nav .nav-link-item:hover {
+            color: #1d8df7 !important;
+        }
+        /* Aşağı kaydır yazısını açık/koyu temaya göre zorlama */
+        .dynamic-scroll-text {
+            color: var(--card-desc) !important;
+        }
+        /* Hakkımda (About) alanındaki alt metinleri ve link yazılarını zorlama */
+        #about p, #about a span {
+            color: var(--card-title) !important;
+        }
+        /* Açık temada ikonların renklerinin de tamamen koyulaşması veya uyum sağlaması için */
+        .light #about a {
+            color: var(--card-title) !important;
+        }
+        .light #about a:hover {
+            color: #1d8df7 !important;
+        }
+        /* İletişim bölümü açıklama metnini açık/koyu temaya göre zorlama */
+        .contact-desc-text {
+            color: var(--card-desc) !important;
+        }
+
+        /* Theme switch */
         .theme-switch{
             width: 64px;
             height: 36px;
@@ -101,14 +147,11 @@
             #mobileMenuToggle { display: none; }
             #mobileMenu { display: none !important; }
         }
-        /* Contact form: ensure input/textarea text and placeholders are readable */
+        /* Contact form configurations */
         #contactForm input, #contactForm textarea, #contactForm select { color: var(--text); }
-        #contactForm input::placeholder, #contactForm textarea::placeholder { color: rgba(255,255,255,0.78); }
-        /* In light theme keep placeholders readable on light background */
-        .light #contactForm input::placeholder, .light #contactForm textarea::placeholder { color: rgba(15,23,42,0.5); }
-        /* Contact labels in light theme: make labels dark for contrast */
+        #contactForm input::placeholder, #contactForm textarea::placeholder { color: rgba(255,255,255,0.5); }
+        .light #contactForm input::placeholder, .light #contactForm textarea::placeholder { color: rgba(15,23,42,0.4); }
         .light #contactForm label { color: var(--text); }
-        /* In light theme make input/textarea background white and text dark for readability */
         .light #contactForm input, .light #contactForm textarea {
             color: var(--text);
             background-color: #ffffff;
@@ -122,118 +165,238 @@
 
     <nav class="fixed w-full z-50 glass">
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-            <span class="text-xl font-bold tracking-tighter text-blue-400">Can</span>
+            <span class="text-xl font-mono font-bold tracking-tight text-slate-400 light:text-slate-600">
+                &lt;<span class="text-blue-400 light:text-blue-600">CST</span>/&gt;
+            </span>
             <div class="md:hidden flex items-center gap-2">
                 <button id="themeToggleMobile" class="theme-switch" aria-label="Tema değiştir mobil">
                     <span class="knob"><i id="themeIconMobile" class="fas fa-moon"></i></span>
                 </button>
-                <button id="mobileMenuToggle" class="hidden text-2xl text-blue-400" aria-label="Menüyü aç">
+                <button id="mobileMenuToggle" class="hidden text-2xl text-blue-400 light:text-blue-600" aria-label="Menüyü aç">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
-            <div id="navMenu" class="space-x-4 text-sm font-medium uppercase tracking-widest flex items-center">
-                <a href="#about" class="hover:text-blue-400 transition">Hakkımda</a>
-                <a href="#skills" class="hover:text-blue-400 transition">Yetenekler</a>
-                <a href="#projects" class="hover:text-blue-400 transition">Projeler</a>
-                <a href="#contact" class="bg-blue-600 px-4 py-2 rounded-full hover:bg-blue-700 transition inline-block ml-3">İletişim</a>
+            <div id="navMenu" class="space-x-4 text-sm font-medium uppercase tracking-widest flex items-center text-slate-300">
+                <a href="#about" class="nav-link-item hover:text-blue-400 transition">Hakkımda</a>
+                <a href="#skills" class="nav-link-item hover:text-blue-400 transition">Yetenekler</a>
+                <a href="#projects" class="nav-link-item hover:text-blue-400 transition">Projeler</a>
+                <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition inline-block ml-3">İletişim</a>
                 <button id="themeToggle" class="theme-switch ml-3" aria-label="Tema değiştir">
                     <span class="knob"><i id="themeIcon" class="fas fa-moon"></i></span>
                 </button>
             </div>
         </div>
-        <div id="mobileMenu" class="hidden md:hidden bg-slate-900/40 backdrop-blur">
-            <a href="#about" class="block px-4 py-2 text-sm font-medium hover:text-blue-400 transition border-b border-slate-700">Hakkımda</a>
-            <a href="#skills" class="block px-4 py-2 text-sm font-medium hover:text-blue-400 transition border-b border-slate-700">Yetenekler</a>
-            <a href="#projects" class="block px-4 py-2 text-sm font-medium hover:text-blue-400 transition border-b border-slate-700">Projeler</a>
-            <a href="#contact" class="block px-4 py-2 text-sm font-medium bg-blue-600 hover:bg-blue-700 transition">İletişim</a>
+        <div id="mobileMenu" class="hidden md:hidden bg-slate-900/90 light:bg-slate-100/95 backdrop-blur">
+            <a href="#about" class="block px-4 py-2 text-sm font-medium hover:text-blue-400 light:text-slate-800 light:hover:text-blue-600 transition border-b border-slate-700 light:border-slate-200">Hakkımda</a>
+            <a href="#skills" class="block px-4 py-2 text-sm font-medium hover:text-blue-400 light:text-slate-800 light:hover:text-blue-600 transition border-b border-slate-700 light:border-slate-200">Yetenekler</a>
+            <a href="#projects" class="block px-4 py-2 text-sm font-medium hover:text-blue-400 light:text-slate-800 light:hover:text-blue-600 transition border-b border-slate-700 light:border-slate-200">Projeler</a>
+            <a href="#contact" class="block px-4 py-2 text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 transition">İletişim</a>
         </div>
     </nav>
 
-    <section id="about" class="h-screen flex flex-col justify-center items-center text-center px-4">
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
+    <section id="about" class="h-screen flex flex-col justify-center items-center text-center px-4 relative">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 light:from-blue-600 light:to-emerald-600">
             Can Semih Topaç
         </h1>
-        <p class="text-xl md:text-2xl text-slate-400 mb-8 max-w-2xl">
-            Bilgisayar Mühendisi | .NET 8 & Backend Developer
+        <p class="text-xl md:text-2xl mb-8 max-w-2xl font-medium">
+            Bilgisayar Mühendisi | .NET 8 & Full Stack Developer
         </p>
-        <div class="flex space-x-6 items-center">
+        <div class="flex space-x-6 items-center mb-12">
             <a href="https://github.com/can-semih-topac" target="_blank" class="flex flex-col items-center text-sm text-center hover:text-blue-400 transition" title="GitHub Profil">
                 <i class="fab fa-github text-3xl"></i>
-                <span class="mt-1">GitHub Profil</span>
+                <span class="mt-1 font-semibold">GitHub Profil</span>
             </a>
             <a href="https://github.com/KouKaggleProject" target="_blank" class="flex flex-col items-center text-sm text-center hover:text-emerald-400 transition" title="GitHub Organizasyon">
                 <i class="fab fa-github text-3xl"></i>
-                <span class="mt-1">KOUggle Organizasyon</span>
+                <span class="mt-1 font-semibold">KOUggle Organizasyon</span>
             </a>
             <a href="https://www.linkedin.com/in/can-semih-topac/" target="_blank" class="flex flex-col items-center text-sm text-center hover:text-blue-400 transition" title="LinkedIn">
                 <i class="fab fa-linkedin text-3xl"></i>
-                <span class="mt-1">LinkedIn</span>
+                <span class="mt-1 font-semibold">LinkedIn</span>
             </a>
+        </div>
 
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none select-none">
+            <span class="text-[10px] uppercase tracking-widest font-bold opacity-80 dynamic-scroll-text">Detaylar İçin Aşağı Kaydırın</span>
+            <div class="animate-bounce mt-1">
+                <i class="fas fa-chevron-down text-blue-400 light:text-blue-600 text-sm"></i>
+            </div>
         </div>
     </section>
 
-    <section id="skills" class="py-20 bg-slate-900/50">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center underline decoration-blue-500 underline-offset-8">Teknik Yetkinlikler</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div class="p-6 glass rounded-xl">
-                    <i class="fas fa-code text-blue-500 text-3xl mb-3"></i>
-                    <h3 class="font-bold">.NET 8 / C#</h3>
+    <section id="skills" class="py-20 bg-slate-50 dark:bg-slate-900/50 transition-colors duration-300">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center underline decoration-blue-500 underline-offset-8 text-slate-900 dark:text-slate-100">Teknik Yetkinlikler</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-center">
+                <div class="p-6 glass rounded-xl border border-slate-200/60 dark:border-slate-800 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+                    <i class="fas fa-code text-blue-500 light:text-blue-600 text-3xl mb-3"></i>
+                    <h3 class="font-bold text-slate-800 dark:text-slate-200">.NET 8 / C#</h3>
                 </div>
-                <div class="p-6 glass rounded-xl">
-                    <i class="fas fa-database text-emerald-500 text-3xl mb-3"></i>
-                    <h3 class="font-bold">MSSQL Server</h3>
+                
+                <div class="p-6 glass rounded-xl border border-slate-200/60 dark:border-slate-800 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+                    <i class="fas fa-layer-group text-purple-500 light:text-purple-600 text-3xl mb-3"></i>
+                    <h3 class="font-bold text-slate-800 dark:text-slate-200">ASP.NET MVC / Web API</h3>
                 </div>
-                <div class="p-6 glass rounded-xl">
-                    <i class="fas fa-layer-group text-purple-500 text-3xl mb-3"></i>
-                    <h3 class="font-bold">ASP.NET MVC</h3>
+
+                <div class="p-6 glass rounded-xl border border-slate-200/60 dark:border-slate-800 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+                    <i class="fas fa-project-diagram text-indigo-500 dark:text-indigo-400 text-3xl mb-3"></i>
+                    <h3 class="font-bold text-slate-800 dark:text-slate-200">EF Core (ORM)</h3>
                 </div>
-                <div class="p-6 glass rounded-xl">
-                    <i class="fab fa-js text-yellow-500 text-3xl mb-3"></i>
-                    <h3 class="font-bold">JavaScript</h3>
+
+                <div class="p-6 glass rounded-xl border border-slate-200/60 dark:border-slate-800 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+                    <i class="fas fa-database text-emerald-500 light:text-emerald-600 text-3xl mb-3"></i>
+                    <h3 class="font-bold text-slate-800 dark:text-slate-200">MSSQL Server</h3>
+                </div>
+
+                <div class="p-6 glass rounded-xl border border-slate-200/60 dark:border-slate-800 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+                    <i class="fab fa-js text-yellow-500 light:text-yellow-600 text-3xl mb-3"></i>
+                    <h3 class="font-bold text-slate-800 dark:text-slate-200">JavaScript</h3>
+                </div>
+
+                <div class="p-6 glass rounded-xl border border-slate-200/60 dark:border-slate-800 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+                    <i class="fab fa-css3-alt text-cyan-500 dark:text-cyan-400 text-3xl mb-3"></i>
+                    <h3 class="font-bold text-slate-800 dark:text-slate-200">Tailwind CSS</h3>
+                </div>
+
+                <div class="p-6 glass rounded-xl border border-slate-200/60 dark:border-slate-800 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+                    <i class="fab fa-git-alt text-orange-500 dark:text-orange-400 text-3xl mb-3"></i>
+                    <h3 class="font-bold text-slate-800 dark:text-slate-200">Git / GitHub</h3>
+                </div>
+
+                <div class="p-6 glass rounded-xl border border-slate-200/60 dark:border-slate-800 flex flex-col items-center justify-center hover:scale-105 transition-transform">
+                    <i class="fas fa-network-wired text-rose-500 dark:text-rose-400 text-3xl mb-3"></i>
+                    <h3 class="font-bold text-slate-800 dark:text-slate-200">RESTful Services</h3>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="py-20">
+   <section id="projects" class="py-20 project-section">
         <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12">Öne Çıkan Projeler</h2>
-            <div class="grid md:grid-cols-2 gap-8">
+            <h2 class="text-3xl font-bold mb-12 underline decoration-blue-500 underline-offset-8">Kurumsal Projeler</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
                 <div class="glass p-8 rounded-2xl hover:scale-[1.02] transition">
                     <h3 class="text-xl font-bold mb-2">KOU Kaggle Platformu</h3>
-                    <p class="text-slate-400 mb-4 text-sm">.NET 8 ve MVC mimarisi ile geliştirilmiş, veri bilimi yarışmaları için merkezi bir platform.</p>
+                    <p class="mb-4 text-sm font-medium">.NET 8 ve MVC mimarisi ile geliştirilmiş, veri bilimi yarışmaları için merkezi bir platform.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded">ASP.NET Core</span>
-                        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded">MSSQL</span>
+                        <span class="text-[10px] bg-blue-500/20 text-blue-400 dark:bg-blue-500/20 dark:text-blue-400 px-2 py-1 rounded font-semibold">ASP.NET Core</span>
+                        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 dark:bg-emerald-500/20 dark:text-emerald-400 px-2 py-1 rounded font-semibold">MSSQL</span>
                     </div>
-                    <a href="https://github.com/KouKaggleProject" target="_blank" class="text-blue-400 text-sm font-bold flex items-center group" title="KOU Kaggle Organization">
+                    <a href="https://github.com/KouKaggleProject" target="_blank" class="text-blue-500 text-sm font-bold flex items-center group">
                         Projeyi İncele <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition"></i>
                     </a>
                 </div>
+
                 <div class="glass p-8 rounded-2xl hover:scale-[1.02] transition">
-                    <h3 class="text-xl font-bold mb-2">Obesity Tracking System</h3>
-                    <p class="text-slate-400 mb-4 text-sm">Klinik analiz ve hasta takibi için tasarlanmış, C# ve JS tabanlı web otomasyonu.</p>
+                    <h3 class="text-xl font-bold mb-2">Obezite Takip Sistemi</h3>
+                    <p class="mb-4 text-sm font-medium">Klinik analiz ve hasta takibi için tasarlanmış, C# ve JS tabanlı web otomasyonu.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Entity Framework</span>
-                        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded">JavaScript</span>
+                        <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded font-semibold">Entity Framework</span>
+                        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded font-semibold">JavaScript</span>
                     </div>
-                    <a href="https://github.com/can-semih-topac" target="_blank" class="text-blue-400 text-sm font-bold flex items-center group" title="Can Semih Topaç - Kodlar">
+                    <a href="https://github.com/can-semih-topac" target="_blank" class="text-blue-500 text-sm font-bold flex items-center group">
                         Projeyi İncele <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition"></i>
                     </a>
                 </div>
+            </div>
+
+            <h3 class="text-2xl font-bold mb-8">Diğer Öne Çıkan Projeler</h3>
+            
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="glass p-6 rounded-xl flex flex-col justify-between hover:scale-[1.02] transition border border-slate-800">
+                    <div>
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center mb-4">
+                            <i class="fas fa-chart-line text-lg"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">Elektrik Tüketimi Tahmini</h4>
+                        <p class="mb-4 text-xs font-medium">Zaman serisi analizi ve makine öğrenmesi algoritmaları kullanılarak geçmiş veriler üzerinden elektrik tüketimi tahmini yapan modelleme projesi.</p>
+                    </div>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-[9px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded font-semibold">Python</span>
+                            <span class="text-[9px] bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded font-semibold">Makine Öğrenmesi</span>
+                        </div>
+                        <a href="https://github.com/can-semih-topac/Electricity_consumption_prediction" target="_blank" class="text-blue-500 text-xs font-bold flex items-center group">
+                            Projeyi İncele <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass p-6 rounded-xl flex flex-col justify-between hover:scale-[1.02] transition border border-slate-800">
+                    <div>
+                        <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4">
+                            <i class="fas fa-leaf text-lg"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">Akıllı Sera Otomasyonu</h4>
+                        <p class="mb-4 text-xs font-medium">Sera ortamındaki sıcaklık, nem ve toprak ıslaklığı gibi kritik verileri sensörler aracılığıyla takip eden ve otomatik kontrol sağlayan akıllı otomasyon sistemi.</p>
+                    </div>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-[9px] bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded font-semibold">IoT</span>
+                            <span class="text-[9px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded font-semibold">Otomasyon</span>
+                        </div>
+                        <a href="https://github.com/can-semih-topac/smart-greenhouse" target="_blank" class="text-blue-500 text-xs font-bold flex items-center group">
+                            Projeyi İncele <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass p-6 rounded-xl flex flex-col justify-between hover:scale-[1.02] transition border border-slate-800">
+                    <div>
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-500 flex items-center justify-center mb-4">
+                            <i class="fas fa-calendar-check text-lg"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">Eş Zamanlı Alışkanlık Takipçisi</h4>
+                        <p class="mb-4 text-xs font-medium">Kullanıcıların günlük alışkanlıklarını planlamalarına, kararlılıkla takip etmelerine ve verilerini cihazlar arasında eş zamanlı olarak senkronize etmelerine olanak tanıyan mobil uyumlu takip uygulaması.</p>
+                    </div>
+                    <div class="mt-auto">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-[9px] bg-purple-500/20 text-purple-400 px-2 py-1 rounded font-semibold">C#</span>
+                            <span class="text-[9px] bg-blue-500/20 text-blue-400 px-2 py-1 rounded font-semibold">Senkronizasyon</span>
+                        </div>
+                        <a href="https://github.com/can-semih-topac/Synchronized_Habit_Tracker_App" target="_blank" class="text-blue-500 text-xs font-bold flex items-center group">
+                            Projeyi İncele <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative p-6 rounded-xl flex flex-col justify-between hover:scale-[1.01] transition-all duration-500 group overflow-visible
+                            border-y border-l border-blue-500/30 border-r-0
+                            bg-gradient-to-r from-blue-600/20 via-purple-600/15 to-transparent">
+                    
+                    <div class="absolute top-12 -right-24 w-64 h-40 rounded-full pointer-events-none mix-blend-screen opacity-85 blur-[45px] transition-all duration-700 group-hover:blur-[35px] group-hover:opacity-100 bg-gradient-to-r from-blue-500/40 via-purple-500/35 to-transparent"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center mb-4 text-white shadow-lg shadow-blue-500/30">
+                            <i class="fab fa-github text-lg"></i>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2">Daha Fazlasını Keşfedin</h4>
+                        <p class="text-xs leading-relaxed mb-6 max-w-[92%] font-semibold">
+                            Geliştirmekte olduğum diğer açık kaynak kodlu projeleri, teknik mimari fikirlerimi ve deneysel çalışmalarımı incelemek için GitHub profilimi ziyaret edebilirsiniz.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-auto relative z-10 max-w-[92%]">
+                        <a href="https://github.com/can-semih-topac" target="_blank" class="inline-flex items-center justify-center w-full px-4 py-2.5 text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-lg transition-all shadow-sm group">
+                            Tüm Depoları Görüntüle 
+                            <i class="fas fa-external-link-alt ml-2 text-[10px] text-slate-400 group-hover:text-blue-500 transition-colors"></i>
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-20 scroll-mt-24 bg-slate-900/40">
+    <section id="contact" class="py-20 scroll-mt-24 bg-slate-900/40 light:bg-slate-100/40">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold mb-3">İletişim</h2>
-                <p class="text-slate-400 max-w-2xl mx-auto">Adını, e-posta adresini ve mesajını yaz. Gönder dediğinde mesaj doğrudan bana iletilir.</p>
+                <h2 class="text-3xl font-bold mb-3 text-slate-100 light:text-slate-900">İletişim</h2>
+                <p class="max-w-2xl mx-auto text-sm font-medium contact-desc-text">İsterseniz bu bölüm üzerinden doğrudan e-posta gönderebilir ya da e-posta adresimi kopyalayarak benimle iletişime geçebilirsiniz.</p>
             </div>
-
+        
             <div class="space-y-6">
                 <div class="glass p-8 rounded-2xl">
                     <form id="contactForm" class="space-y-5" action="https://formsubmit.co/ed5626c8fec925301fba59b6e588fe61" method="POST">
@@ -242,36 +405,33 @@
                         <input type="hidden" name="_template" value="table">
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
-                                <label for="contactName" class="block text-sm font-medium text-slate-300 mb-2">Ad Soyad</label>
+                                <label for="contactName" class="block text-sm font-medium text-slate-300 light:text-slate-700 mb-2">Ad Soyad</label>
                                 <input id="contactName" name="name" type="text" autocomplete="name" required class="w-full rounded-lg bg-slate-900/70 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" placeholder="Adın Soyadın">
                             </div>
                             <div>
-                                <label for="contactEmail" class="block text-sm font-medium text-slate-300 mb-2">E-posta</label>
+                                <label for="contactEmail" class="block text-sm font-medium text-slate-300 light:text-slate-700 mb-2">E-posta</label>
                                 <input id="contactEmail" name="email" type="email" autocomplete="email" required class="w-full rounded-lg bg-slate-900/70 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" placeholder="ornek@mail.com">
                             </div>
                         </div>
 
                         <div>
-                            <label for="contactMessage" class="block text-sm font-medium text-slate-300 mb-2">Mesaj</label>
+                            <label for="contactMessage" class="block text-sm font-medium text-slate-300 light:text-slate-700 mb-2">Mesaj</label>
                             <textarea id="contactMessage" name="message" rows="6" required class="w-full rounded-lg bg-slate-900/70 border border-slate-700 px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500" placeholder="Mesajını buraya yaz..."></textarea>
                         </div>
 
                         <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition">Gönder</button>
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition">Gönder</button>
                         </div>
 
                         <p id="contactStatus" class="text-sm text-emerald-400 hidden">Mesaj gönderiliyor...</p>
                     </form>
                 </div>
 
-                <div class="glass px-6 py-5 rounded-2xl flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                    <div class="min-w-0">
-                        <h3 class="text-lg font-bold">Doğrudan Ulaş</h3>
-                        <p class="text-white text-sm">E-posta adresini kopyala veya gönder butonuyla mail uygulamana geç.</p>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span class="text-sm break-all text-slate-100" id="emailText">can.semih.topac18@gmail.com</span>
-                        <button id="copyEmail" type="button" class="shrink-0 text-xs bg-slate-700 hover:bg-slate-600 px-3 py-2 rounded-lg">Kopyala</button>
+                <div class="glass px-6 py-5 rounded-2xl flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between contact-info-box">
+                    <h3 class="text-lg font-bold text-slate-200">İletişim Bilgileri</h3>
+                    <div class="flex items-center gap-3 flex-nowrap lg:ml-auto lg:w-auto">
+                        <span class="text-sm whitespace-nowrap text-slate-100">can.semih.topac18@gmail.com</span>
+                        <button id="copyEmail" type="button" class="shrink-0 whitespace-nowrap text-xs bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 rounded-lg lg:-translate-x-1 light:bg-slate-200 light:text-slate-800 light:hover:bg-slate-300">Kopyala</button>
                     </div>
                     <p id="copyStatus" class="text-xs text-emerald-400 hidden"></p>
                 </div>
@@ -279,23 +439,23 @@
         </div>
     </section>
 
-    <footer class="py-10 text-center text-slate-500 text-xs border-t border-slate-800">
+    <footer class="py-10 text-center text-slate-500 text-xs border-t border-slate-800 light:border-slate-200">
         &copy; 2026 Can Semih Topaç. Built with Clean Code Principles.
     </footer>
 
     <script>
         (function(){
             const copyBtn = document.getElementById('copyEmail');
-            const emailTextEl = document.getElementById('emailText');
             const copyStatus = document.getElementById('copyStatus');
             const contactStatus = document.getElementById('contactStatus');
             const contactForm = document.getElementById('contactForm');
-            const email = emailTextEl ? emailTextEl.textContent.trim() : 'can.semih.topac18@gmail.com';
+            const email = 'can.semih.topac18@gmail.com';
 
             copyBtn && copyBtn.addEventListener('click', async function(){
                 try{
                     await navigator.clipboard.writeText(email);
                     copyStatus.classList.remove('hidden');
+                    copyStatus.textContent = 'Kopyalandı!';
                     setTimeout(function(){ copyStatus.classList.add('hidden'); }, 2000);
                 }catch(err){
                     alert('Kopyalama desteklenmiyor: ' + err);
@@ -310,7 +470,6 @@
                 const submitUrl = 'https://formsubmit.co/ajax/ed5626c8fec925301fba59b6e588fe61';
                 const formData = new FormData(contactForm);
 
-                // include anti-spam hidden fields if present
                 fetch(submitUrl, {
                     method: 'POST',
                     body: formData,
