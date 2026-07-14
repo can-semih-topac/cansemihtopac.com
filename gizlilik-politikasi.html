@@ -13,6 +13,13 @@
             --glass-border: rgba(255,255,255,0.06);
             --muted: #94a3b8;
         }
+        .light{
+            --bg: #f8fafc;
+            --text: #0f172a;
+            --glass-bg: rgba(15,23,42,0.04);
+            --glass-border: rgba(15,23,42,0.08);
+            --muted: #475569;
+        }
         body { background-color: var(--bg); color: var(--text); }
         .glass { background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); }
         h2 { margin-top: 2rem; margin-bottom: 0.75rem; font-weight: 700; font-size: 1.25rem; }
@@ -24,42 +31,53 @@
 <body>
     <div class="max-w-3xl mx-auto px-6 py-16">
         <a href="/" class="text-sm" style="color:var(--muted)">&larr; Ana sayfaya dön</a>
+
         <div class="glass rounded-2xl p-8 md:p-12 mt-6">
             <h1 class="text-2xl md:text-3xl font-bold mb-2">Can Cüzdan Gizlilik Politikası</h1>
-           <p><em>Son güncelleme: 14 Temmuz 2026</em></p>
+            <p class="text-sm mb-8"><em>Son güncelleme: 14 Temmuz 2026</em></p>
+
+            <p>Bu Gizlilik Politikası, "Can Cüzdan" mobil uygulamasını ("Uygulama") kullanan kullanıcıların ("Kullanıcı", "siz") kişisel verilerinin nasıl toplandığını, işlendiğini ve korunduğunu açıklar. Uygulama, can.semih.topac18@gmail.com tarafından geliştirilip işletilmektedir ("Geliştirici", "biz").</p>
 
             <h2>1. Topladığımız Veriler</h2>
-                <p>Uygulamaya kayıt olduğunuzda ve kullandığınızda aşağıdaki kişisel verileri işleriz:</p>
+            <p>Uygulamaya kayıt olduğunuzda ve kullandığınızda aşağıdaki kişisel verileri işleriz:</p>
             <ul>
-              <li><strong>Kimlik ve iletişim bilgileri:</strong> Ad, soyad, telefon numarası, e-posta adresi, cinsiyet, doğum tarihi</li>
-              <li><strong>Hesap güvenliği:</strong> Şifreniz geri döndürülemez biçimde (hash'lenerek) saklanır; biz de dahil hiç kimse gerçek şifrenizi göremez</li>
-              <li><strong>Üyelik/kart bilgileri:</strong> Üye olduğunuz kurum(lar), üyelik başlangıç/bitiş tarihleri, üyelik durumu (aktif/pasif)</li>
-              <li><strong>Kullanım verileri:</strong> Uygulama üzerinden ürettiğiniz geçici QR doğrulama kodları ve üretim zamanları</li>
-              <li><strong>Kurum yöneticisi bilgileri (kurumsal panel kullanıcıları için):</strong> Kurum adına panele giriş yapan yetkili/sorumlu kişinin adı, e-posta adresi ve telefon numarası</li>
+                <li><strong>Kimlik ve iletişim bilgileri:</strong> Ad, soyad, telefon numarası, e-posta adresi, cinsiyet, doğum tarihi</li>
+                <li><strong>Hesap güvenliği:</strong> Şifreniz geri döndürülemez biçimde (hash'lenerek) saklanır; biz de dahil hiç kimse gerçek şifrenizi göremez</li>
+                <li><strong>Üyelik/kart bilgileri:</strong> Üye olduğunuz kurum(lar), üyelik başlangıç/bitiş tarihleri, üyelik durumu (aktif/pasif)</li>
+                <li><strong>Kullanım verileri:</strong> Uygulama üzerinden ürettiğiniz geçici QR doğrulama kodları ve üretim zamanları</li>
+                <li><strong>Kurum yöneticisi bilgileri (kurumsal panel kullanıcıları için):</strong> Kurum adına panele giriş yapan yetkili/sorumlu kişinin adı, e-posta adresi ve telefon numarası</li>
             </ul>
+
             <h2>2. Verilerin Kullanım Amacı</h2>
             <ul>
                 <li>Hesabınızı oluşturmak, giriş yapmanızı sağlamak ve kimliğinizi doğrulamak</li>
-                <li>Üyeliklerinizi görüntülemenizi ve yönetmenizi sağlamak</li>
+                <li>Kurumlar tarafından tanımlanan üyeliklerinizi görüntülemenizi ve yönetmenizi sağlamak</li>
                 <li>Fiziki geçiş/üyelik doğrulaması için tek kullanımlık, süreli QR kodu üretmek</li>
                 <li>Şifre sıfırlama gibi hesap güvenliği işlemlerini yürütmek</li>
             </ul>
+
             <h2>3. Verilerin Paylaşımı</h2>
+            <p>Kişisel verileriniz, aşağıdaki durumlar dışında üçüncü taraflarla paylaşılmaz veya satılmaz:</p>
             <ul>
-                <li><strong>Üye olduğunuz kurum(lar):</strong> Üyelik durumunuzu (aktif/pasif, geçerlilik tarihi) görebilir.</li>
-                <li><strong>E-posta hizmet sağlayıcısı (Brevo):</strong> Şifre sıfırlama kodlarının iletilmesi için kullanılır.</li>
-                <li><strong>Yasal zorunluluklar:</strong> Yetkili makamların talebi halinde.</li>
+                <li><strong>Üye olduğunuz kurum(lar):</strong> Üyeliğinizin doğrulanabilmesi için ilgili kurum; adınızı, soyadınızı, telefon numaranızı, üyelik durumunuzu (aktif/pasif, geçerlilik tarihi) ve son QR kod üretim zamanınızı kendi kurum panelinden görebilir.</li>
+                <li><strong>E-posta hizmet sağlayıcısı (Brevo):</strong> Şifre sıfırlama kodlarının e-posta yoluyla iletilebilmesi için Brevo (Sendinblue) altyapısı kullanılır; bu amaç dışında veri paylaşılmaz.</li>
+                <li><strong>Yasal zorunluluklar:</strong> Yürürlükteki mevzuat gereği yetkili makamların talebi halinde.</li>
             </ul>
+
             <h2>4. Verilerin Saklanması ve Güvenliği</h2>
-            <p>Verileriniz HTTPS üzerinden iletilir. Şifreniz BCrypt ile hash'lenerek saklanır. QR kodları kısa ömürlü ve tek kullanımlıktır.</p>
+            <p>Verileriniz şifreli bağlantılar (HTTPS) üzerinden iletilir. Şifreniz endüstri standardı bir algoritma (BCrypt) ile hash'lenerek saklanır. QR kodları kısa ömürlü olacak şekilde tasarlanmıştır ve tekrar kullanılamaz. Verileriniz, hesabınız aktif olduğu sürece veya yasal saklama süreleri gerektirdiği müddetçe saklanır.</p>
+
             <h2>5. Haklarınız (KVKK Kapsamında)</h2>
-            <p>6698 sayılı KVKK kapsamında verilerinizin işlenip işlenmediğini öğrenme, düzeltilmesini veya silinmesini isteme haklarına sahipsiniz.</p>
+            <p>6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında; verilerinizin işlenip işlenmediğini öğrenme, işlenmişse buna ilişkin bilgi talep etme, işlenme amacına uygun kullanılıp kullanılmadığını öğrenme, eksik/yanlış verilerin düzeltilmesini isteme ve KVKK'nın 7. maddesinde öngörülen şartlar çerçevesinde verilerinizin silinmesini/yok edilmesini isteme haklarına sahipsiniz. Bu haklarınızı kullanmak için aşağıdaki iletişim bilgilerinden bize ulaşabilirsiniz.</p>
+
             <h2>6. Çocukların Gizliliği</h2>
             <p>Uygulama, 13 yaşın altındaki çocuklardan bilerek kişisel veri toplamaz.</p>
+
             <h2>7. Politika Değişiklikleri</h2>
-            <p>Önemli değişiklikler bu sayfada yayımlanarak duyurulur.</p>
+            <p>Bu Gizlilik Politikası zaman zaman güncellenebilir. Önemli değişiklikler bu sayfada yayımlanarak duyurulur.</p>
+
             <h2>8. İletişim</h2>
-            <p>Sorularınız için: <a href="mailto:can.semih.topac18@gmail.com">can.semih.topac18@gmail.com</a></p>
+            <p>Gizlilik politikamızla ilgili sorularınız için bize <a href="mailto:can.semih.topac18@gmail.com">can.semih.topac18@gmail.com</a> adresinden ulaşabilirsiniz.</p>
         </div>
     </div>
 </body>
