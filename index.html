@@ -27,6 +27,11 @@
             --card-title: #0f172a !important;
             --card-desc: #1e293b !important;
         }
+        /* Decorative glow elements (.accent-left/right, project card blobs) are
+           meant to bleed past their container's edge; without this they inflate
+           the document's scrollable width and make the whole page horizontally
+           scrollable / mis-scaled on mobile. */
+        html, body { overflow-x: hidden; }
         body { background-color: var(--bg); color: var(--text); }
         .glass { background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); }
         .muted { color: var(--muted); }
