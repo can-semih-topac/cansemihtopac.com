@@ -147,6 +147,15 @@
             #mobileMenuToggle { display: none; }
             #mobileMenu { display: none !important; }
         }
+        /* Hero section: use dvh so mobile browsers (esp. in-app browsers with
+           dynamic toolbars) size the section to the real visible viewport
+           instead of a mismatched 100vh, which caused an oversized empty
+           gap and the next section peeking in early on phones. */
+        .hero-height{ min-height: 100vh; }
+        @supports (height: 100dvh){
+            .hero-height{ min-height: 100dvh; }
+        }
+
         /* Contact form configurations */
         #contactForm input, #contactForm textarea, #contactForm select { color: var(--text); }
         #contactForm input::placeholder, #contactForm textarea::placeholder { color: rgba(255,255,255,0.5); }
@@ -194,7 +203,7 @@
         </div>
     </nav>
 
-    <section id="about" class="h-screen flex flex-col justify-center items-center text-center px-4 relative">
+    <section id="about" class="hero-height flex flex-col justify-center items-center text-center px-4 relative">
         <h1 class="text-5xl md:text-7xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 light:from-blue-600 light:to-emerald-600">
             Can Semih Topaç
         </h1>
